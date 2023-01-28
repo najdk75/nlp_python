@@ -1,6 +1,6 @@
 
 
-descripteur = open("livre01.txt","r",encoding='utf8')
+descripteur = open("laFontaine01.txt","r",encoding='utf8')
 liste_lignes = descripteur.readlines()
 lines = []
 for line in liste_lignes :
@@ -44,7 +44,7 @@ def remove_punctuation(text):
         return cleaned_text
     
     
-def clean_text(lines):
+def cleaning(lines):
     cleaned_lines = []
     for line in lines: 
         if line != "": # on ajoute pas de ligne vide
@@ -60,11 +60,12 @@ def clean_text(lines):
         
     return cleaned_lines
 
-lines = clean_text(lines)
+lines = cleaning(lines)
 
 
 
 def reduce(lines):
+    lines = list(map(lambda phrase : phrase.lower(),lines))
     res = {}
     for line in lines:
         for word in line.split():
@@ -74,7 +75,7 @@ def reduce(lines):
 word_count = reduce(lines)
 
 cleaned = sorted(word_count.items(),key=lambda x : x[1], reverse=True)
-
+print(cleaned)
 words = [word for word,count in cleaned]
 counts = [count for word,count in cleaned]
 
@@ -83,15 +84,14 @@ counts = [count for word,count in cleaned]
 
 # import de la bibliothèque
 import seaborn as sns 
-import pandas as pd
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 #modifier la taille de la figure pour l'adapter
-sns.set(rc={'figure.figsize':(200,100)})
+sns.set(rc={'figure.figsize':(100,50)})
 
 # afficher un histogramme. les données doivent être dans une liste
 # transformez donc vos clés et valeurs du dictionnaire en liste
 # idéalement ordonnez vos clés
 sns.barplot(data=None,x = words, y = counts)
 
-
+plt.savefig("wordcount.png")
