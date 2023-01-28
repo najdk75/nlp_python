@@ -1,6 +1,6 @@
 
 
-descripteur = open("laFontaine01.txt","r",encoding='utf8')
+descripteur = open("livre01.txt","r",encoding='utf8')
 liste_lignes = descripteur.readlines()
 lines = []
 for line in liste_lignes :
